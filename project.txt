@@ -1,0 +1,18 @@
+Frontend (HTML, CSS, JavaScript):
+
+- index.html (login and registration page)
+- dashboard.html (patient dashboard)
+- doctor-dashboard.html (doctor dashboard)
+- appointment.html (appointment booking page)
+- consultation.html (virtual consultation page)
+- profile.html (user profile page)
+- styles.css (CSS styles)
+- script.js (JavaScript code for frontend logic)
+
+Backend (Node.js and MySQL):
+
+- server.js (server setup and routing)
+- models.js (database models for users, doctors, appointments, and consultations)
+- controllers.js (controller functions for user authentication, appointment booking, and consultation management)
+- routes.js (API routes for frontend requests)
+- database.sql (MySQL database schema)
