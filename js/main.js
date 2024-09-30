@@ -1,3 +1,4 @@
+
 (function($) {
     "use strict";
      $(document).on('ready', function() {
@@ -17,10 +18,6 @@
 			} else {
 				$('.header').removeClass("sticky");
 			}
-		});
-		
-		$('.pro-features .get-pro').on( "click", function(){
-			$('.pro-features').toggleClass('active');
 		});
 		
 		/*		Search JS		*/ 
@@ -240,7 +237,7 @@
 				lng: 90.884780,
 				title: 'Marker with InfoWindow',
 				infoWindow: {
-				content: '<p>welcome to Medipro</p>'
+				content: '<p>welcome to Mediplus</p>'
 			}
 		
 		});
@@ -253,3 +250,90 @@
 	
 	
 })(jQuery);
+
+/* Contact Form validation in real time  */
+
+document.addEventListener("DOMContentLoaded", function(){
+	const form = document.getElementById("contactForm");
+	const summaryContect = document.getElementById("summaryContect");
+	const confirmationMessage = document.getElementById("confirmationMessage");
+	form.addEventListener("submit", function(event){
+		event.preventDefault(); 
+
+		/* clear previous errors  */
+		document.querySelectorAll('.error').forEach(e => e.remove());
+
+		/* Capture form data */
+		const first_name = form.elements["first_name"].value;
+		const last_name = form.elements["last_name"].value;
+		const email = form.elements["email"].value;
+		const phone = form.elements["phone"].value;
+	    const subject = form.elements["subject"].value;
+	    const message = form.elements["message"].value;
+		const gender = document.querySelector('input[name="Gender"]:checked');
+
+		/* Validate data */
+		let isValid = true;
+		if(first_name.value.trim()===""){
+			showError(first_name, "Please enter your first name.");
+			isValid = false;
+		}
+
+		if(last_name.value.trim()===""){
+			showError(last_name, "Please enter your last name");
+			isValid = false;
+		}
+
+		if(!validateEmail(email)){
+			showError("Please enter a valid email address.");
+			isValid = false;
+		}
+
+		if(subject.value.length < 10){
+			showError(message, "Message must be above 10 characters");
+			isValid = false;
+		}
+
+		const ageNum = parseInt(age.value);
+		if(isNaN(ageNum)){
+			showError(age, "Please enter a valid age");
+			isValid = false;
+		}
+
+		if(!gender){
+			showError(document.querySelector('fieldset'), "Please select your gender");
+			isValid = false;
+		}
+
+		if(isValid){
+			alert('Registration Successful');
+
+			form.submit(); /* Submit the form if all validations pass */
+
+			/* Reset the form */
+			form.requestFullscreen();
+		}
+	});
+
+	form.elements["email"].addEventListener("input", function(){
+		const email = form.elements["email"].value;
+		if(!validateEmail(email)){
+			confirmationMessage.textContent = "Invalid email formart";
+			confirmationMessage.className = "error";
+		}else{
+			confirmationMessage.textContent = "";
+		}
+	});
+
+	function validateEmail(email){
+		const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		return re.test(String(email).toLowerCase);
+	}
+
+	function showError(field, message){
+		const error = document.createElement('p');
+		error.className = 'error';
+		error.innerText = message;
+		field.parentNode.insertBefore(error, field.nextSibling);
+	}
+});
